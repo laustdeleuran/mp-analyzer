@@ -1,0 +1,77 @@
+{
+  "lastFetched": "2024-01-01T00:00:00.000Z",
+  "ticks": [
+    {
+      "id": "sample-1",
+      "routeName": "The Nose",
+      "area": "Yosemite Valley",
+      "grade": "5.14a",
+      "style": "Lead",
+      "date": "2023-10-10",
+      "link": "https://www.mountainproject.com/route/105833333/the-nose"
+    },
+    {
+      "id": "sample-2",
+      "routeName": "Snake Dike",
+      "area": "Yosemite Valley",
+      "grade": "5.7",
+      "style": "Lead",
+      "date": "2023-05-20",
+      "link": "https://www.mountainproject.com/route/105861056/snake-dike"
+    },
+    {
+      "id": "sample-3",
+      "routeName": "Outer Space",
+      "area": "Leavenworth",
+      "grade": "5.9",
+      "style": "Lead",
+      "date": "2022-08-14",
+      "link": "https://www.mountainproject.com/route/105808112/outer-space"
+    },
+    {
+      "id": "sample-4",
+      "routeName": "Solar Slab",
+      "area": "Red Rock",
+      "grade": "5.6",
+      "style": "Lead",
+      "date": "2021-03-01",
+      "link": "https://www.mountainproject.com/route/105732347/solar-slab"
+    },
+    {
+      "id": "sample-5",
+      "routeName": "Scarface",
+      "area": "Indian Creek",
+      "grade": "5.11c",
+      "style": "Lead",
+      "date": "2024-02-15",
+      "link": "https://www.mountainproject.com/route/105717946/scarface"
+    },
+    {
+      "id": "sample-6",
+      "routeName": "The Line",
+      "area": "Lover's Leap",
+      "grade": "5.9",
+      "style": "Lead",
+      "date": "2022-06-01",
+      "link": "https://www.mountainproject.com/route/105875795/the-line"
+    },
+    {
+      "id": "sample-7",
+      "routeName": "Midnight Lightning",
+      "area": "Yosemite Valley",
+      "grade": "V8",
+      "style": "Boulder",
+      "date": "2023-11-05",
+      "link": "https://www.mountainproject.com/route/105874345/midnight-lightning"
+    },
+    {
+      "id": "sample-8",
+      "routeName": "Bishop's Terrace",
+      "area": "Yosemite Valley",
+      "grade": "5.8+",
+      "style": "Lead",
+      "date": "2020-09-18",
+      "link": "https://www.mountainproject.com/route/105862265/bishops-terrace"
+    }
+  ]
+}

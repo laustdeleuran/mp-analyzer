@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --pyramid-track-color: #cfe1ff;
+  --pyramid-fill-color: #2563eb;
 }
 
 @theme inline {
@@ -17,6 +19,8 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --pyramid-track-color: #1e293b;
+    --pyramid-fill-color: #60a5fa;
   }
 }
 
@@ -24,4 +28,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-lato-sans), Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+main {
+  min-height: 100vh;
 }

@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "rm -rf .test-dist && tsc -p tsconfig.test.json && NODE_ENV=test node --test .test-dist/tests/**/*.js"
   },
   "dependencies": {
     "@radix-ui/themes": "^3.2.1",
