@@ -7,20 +7,22 @@ import type { BucketsResponse, PeriodCount } from '@/hooks/useTickBuckets';
 function PeriodList({ periods }: { periods: PeriodCount[] }) {
   if (!periods.length) return null;
   return (
-    <div>
-      <Heading as="h3" size="3" mb="2">
+    <div className="summary__periods">
+      <Heading as="h3" size="3">
         Yearly ascents
       </Heading>
-      <Flex direction="column" gap="1">
+      <div className="summary__period-grid">
         {periods.map((period) => (
-          <Flex key={period.key} justify="between" align="center">
-            <Text size="2">{period.key}</Text>
-            <Text size="2" weight="bold">
+          <div key={period.key} className="summary__period-item">
+            <Text size="2" color="gray">
+              {period.key}
+            </Text>
+            <Text size="3" weight="bold">
               {period.count}
             </Text>
-          </Flex>
+          </div>
         ))}
-      </Flex>
+      </div>
     </div>
   );
 }
@@ -36,29 +38,42 @@ export function TickSummary({ data }: TickSummaryProps) {
   const { summary, periods } = data;
 
   return (
-    <Card p="4">
-      <Heading as="h2" size="4" mb="3">
-        Summary
-      </Heading>
-      <Flex direction="column" gap="3">
-        <Flex justify="between" align="center">
-          <Text size="2">Total climbs</Text>
-          <Text size="2" weight="bold">
-            {summary.total}
+    <Card className="panel panel--summary" variant="surface" p={{ initial: '4', md: '5' }}>
+      <Flex direction="column" gap="5">
+        <div className="summary__header">
+          <Heading as="h2" size="4">
+            Session snapshot
+          </Heading>
+          <Text size="2" color="gray">
+            A quick look at your climbing history within the active filters.
           </Text>
-        </Flex>
-        <Flex justify="between" align="center">
-          <Text size="2">Hardest grade</Text>
-          <Text size="2" weight="bold">
-            {summary.hardest ?? '–'}
-          </Text>
-        </Flex>
-        <Flex justify="between" align="center">
-          <Text size="2">Easiest grade</Text>
-          <Text size="2" weight="bold">
-            {summary.easiest ?? '–'}
-          </Text>
-        </Flex>
+        </div>
+        <div className="summary__grid">
+          <div className="summary__stat">
+            <Text size="2" color="gray">
+              Total climbs
+            </Text>
+            <Text size="6" weight="bold">
+              {summary.total}
+            </Text>
+          </div>
+          <div className="summary__stat">
+            <Text size="2" color="gray">
+              Hardest grade
+            </Text>
+            <Text size="6" weight="bold">
+              {summary.hardest ?? '–'}
+            </Text>
+          </div>
+          <div className="summary__stat">
+            <Text size="2" color="gray">
+              Easiest grade
+            </Text>
+            <Text size="6" weight="bold">
+              {summary.easiest ?? '–'}
+            </Text>
+          </div>
+        </div>
         <PeriodList periods={periods} />
       </Flex>
     </Card>

@@ -35,7 +35,7 @@ export function DateRangePicker() {
   return (
     <Popover.Root>
       <Popover.Trigger>
-        <Button variant="soft" aria-label="Select date range">
+        <Button variant="soft" aria-label="Select date range" className="w-full justify-between">
           {formatLabel(dateRange)}
         </Button>
       </Popover.Trigger>
@@ -50,6 +50,7 @@ export function DateRangePicker() {
               type="date"
               value={localRange[0] ?? ''}
               onChange={(event) => setLocalRange([event.target.value || null, localRange[1]])}
+              className="date-input"
             />
           </label>
           <label className="flex flex-col gap-1 text-sm">
@@ -58,6 +59,7 @@ export function DateRangePicker() {
               type="date"
               value={localRange[1] ?? ''}
               onChange={(event) => setLocalRange([localRange[0], event.target.value || null])}
+              className="date-input"
             />
           </label>
           <Flex gap="2" justify="between">

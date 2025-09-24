@@ -15,13 +15,13 @@ export function GradeRangeSlider() {
   };
 
   return (
-    <div>
+    <div className="grade-range">
       <Text as="label" size="2" weight="bold" htmlFor="grade-range-slider">
         Grade range
       </Text>
-      <div className="mt-2 flex items-center justify-between text-sm text-gray-600">
-        <span>{gradeLabelFromIndex(gradeRange[0])}</span>
-        <span>{gradeLabelFromIndex(gradeRange[1])}</span>
+      <div className="grade-range__labels">
+        <span className="grade-range__chip">{gradeLabelFromIndex(gradeRange[0])}</span>
+        <span className="grade-range__chip">{gradeLabelFromIndex(gradeRange[1])}</span>
       </div>
       <Slider
         id="grade-range-slider"
@@ -32,7 +32,7 @@ export function GradeRangeSlider() {
         step={1}
         size="2"
         aria-label="Grade range"
-        mt="3"
+        className="grade-range__slider"
       />
     </div>
   );

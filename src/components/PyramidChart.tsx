@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Text } from '@radix-ui/themes';
+import { Card, Flex, Heading, Text } from '@radix-ui/themes';
 
 import type { GradeBucket } from '@/lib/types';
 
@@ -16,7 +16,7 @@ type PyramidChartProps = {
 export function PyramidChart({ buckets, loading }: PyramidChartProps) {
   if (loading) {
     return (
-      <Card role="status" aria-live="polite" p="6">
+      <Card className="panel panel--chart" role="status" aria-live="polite" p={{ initial: '4', md: '5' }}>
         <Text>Loading tick data…</Text>
       </Card>
     );
@@ -24,7 +24,7 @@ export function PyramidChart({ buckets, loading }: PyramidChartProps) {
 
   if (!buckets.length) {
     return (
-      <Card p="6" role="status" aria-live="polite">
+      <Card className="panel panel--chart" p={{ initial: '4', md: '5' }} role="status" aria-live="polite">
         <Text>No ticks found for the selected filters.</Text>
       </Card>
     );
@@ -33,51 +33,39 @@ export function PyramidChart({ buckets, loading }: PyramidChartProps) {
   const maxCount = Math.max(...buckets.map((bucket) => bucket.count), 1);
 
   return (
-    <div aria-label="Tick pyramid" role="list" style={{ display: 'grid', gap: '12px' }}>
-      {buckets.map((bucket) => {
-        const widthPercent = (bucket.count / maxCount) * 100;
-        return (
-          <div
-            key={bucket.label}
-            role="listitem"
-            style={{ display: 'flex', alignItems: 'center', gap: '12px' }}
-          >
-            <Text size="2" style={{ width: '4.5rem', textAlign: 'right', fontWeight: 500 }}>
-              {bucket.label}
-            </Text>
-            <div style={{ flex: 1 }}>
-              <div
-                aria-label={`${bucket.label}: ${formatCount(bucket.count)}`}
-                style={{
-                  position: 'relative',
-                  height: '24px',
-                  borderRadius: '9999px',
-                  background: 'var(--pyramid-track-color, #cfe1ff)',
-                  overflow: 'hidden',
-                }}
-              >
-                <div
-                  style={{
-                    position: 'absolute',
-                    left: '50%',
-                    top: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    height: '16px',
-                    borderRadius: '9999px',
-                    width: `${Math.max(widthPercent, 4)}%`,
-                    maxWidth: '100%',
-                    background: 'var(--pyramid-fill-color, #2563eb)',
-                    transition: 'width 160ms ease',
-                  }}
-                />
+    <Card className="panel panel--chart" variant="surface" p={{ initial: '4', md: '5' }}>
+      <Flex direction="column" gap="5">
+        <Flex direction="column" gap="2">
+          <Heading as="h2" size="4">
+            Grade pyramid
+          </Heading>
+          <Text size="2" color="gray">
+            Each band shows the total number of ticks for the corresponding grade bucket.
+          </Text>
+        </Flex>
+        <div aria-label="Tick pyramid" role="list" className="pyramid">
+          {buckets.map((bucket) => {
+            const widthPercent = (bucket.count / maxCount) * 100;
+            return (
+              <div key={bucket.label} role="listitem" className="pyramid__row">
+                <Text size="2" className="pyramid__label">
+                  {bucket.label}
+                </Text>
+                <div className="pyramid__bar-wrapper">
+                  <div
+                    aria-label={`${bucket.label}: ${formatCount(bucket.count)}`}
+                    className="pyramid__bar"
+                    style={{ width: `${Math.max(widthPercent, 6)}%` }}
+                  />
+                </div>
+                <Text size="2" className="pyramid__value">
+                  {bucket.count}
+                </Text>
               </div>
-            </div>
-            <Text size="2" style={{ width: '2.5rem' }}>
-              {bucket.count}
-            </Text>
-          </div>
-        );
-      })}
-    </div>
+            );
+          })}
+        </div>
+      </Flex>
+    </Card>
   );
 }

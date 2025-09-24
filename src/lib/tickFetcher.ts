@@ -5,7 +5,6 @@ import { enhanceTicks } from './aggregation';
 import type { BucketRequest, Tick, TickCache } from './types';
 
 const CACHE_PATH = path.join(process.cwd(), 'data', 'ticks-cache.json');
-const SAMPLE_PATH = path.join(process.cwd(), 'data', 'sample-ticks.json');
 const FETCH_INTERVAL = Number.parseInt(process.env.MP_FETCH_INTERVAL ?? '', 10) || 1000 * 60 * 60;
 
 let currentRefresh: Promise<TickCache> | null = null;
@@ -142,10 +141,6 @@ async function fetchRemoteTicks(): Promise<TickCache | null> {
   }
 }
 
-async function loadSample(): Promise<TickCache | null> {
-  return readCacheFile(SAMPLE_PATH);
-}
-
 export async function refreshTicks(force = false): Promise<TickCache> {
   if (currentRefresh && !force) {
     return currentRefresh;
@@ -160,11 +155,6 @@ export async function refreshTicks(force = false): Promise<TickCache> {
     const existing = await readCacheFile(CACHE_PATH);
     if (existing) {
       return existing;
-    }
-    const sample = await loadSample();
-    if (sample) {
-      await writeCache(sample);
-      return sample;
     }
     return { lastFetched: new Date().toISOString(), ticks: [] };
   })();

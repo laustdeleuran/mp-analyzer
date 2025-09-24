@@ -11,30 +11,38 @@ export default function HomePage() {
   const { data, loading, error, refresh } = useTickBuckets();
 
   return (
-    <Container size="4" py="6">
-      <Flex direction="column" gap="4" mb="6">
-        <Heading as="h1" size="7">
-          Tick Pyramid
-        </Heading>
-        <Text size="3" color="gray">
-          Explore your Mountain Project ticks by grade and timeframe. Adjust the filters to focus on the
-          climbs that matter most to you.
-        </Text>
-        {error ? (
-          <Text color="red" role="alert">
-            {error}
-          </Text>
-        ) : null}
-      </Flex>
-      <Flex direction={{ initial: 'column', md: 'row' }} gap="6">
-        <div style={{ flex: '0 0 280px' }}>
-          <TickFilters onRefresh={refresh} refreshing={loading} lastUpdated={data?.lastFetched} />
-        </div>
-        <Flex direction="column" gap="5" style={{ flex: 1 }}>
-          <TickSummary data={data} />
-          <PyramidChart buckets={data?.buckets ?? []} loading={loading} />
+    <div className="dashboard">
+      <div className="dashboard__glow" aria-hidden />
+      <Container
+        size="4"
+        className="dashboard__container"
+        px={{ initial: '4', sm: '6', lg: '8' }}
+        py={{ initial: '6', md: '8' }}
+      >
+        <Flex direction="column" gap="7">
+          <Flex direction="column" gap="3" className="dashboard__header">
+            <Heading as="h1" size="8">
+              Tick Pyramid
+            </Heading>
+            <Text size="4" color="gray">
+              Track how your climbing volume shifts across grades over time. Use the controls to surface the
+              sends you care about most.
+            </Text>
+            {error ? (
+              <Text color="tomato" role="alert">
+                {error}
+              </Text>
+            ) : null}
+          </Flex>
+          <div className="dashboard__content">
+            <TickFilters onRefresh={refresh} refreshing={loading} lastUpdated={data?.lastFetched} />
+            <div className="dashboard__main">
+              <TickSummary data={data} />
+              <PyramidChart buckets={data?.buckets ?? []} loading={loading} />
+            </div>
+          </div>
         </Flex>
-      </Flex>
-    </Container>
+      </Container>
+    </div>
   );
 }
